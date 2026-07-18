@@ -1,0 +1,20 @@
+{
+  "name": "hybrid-programming",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "compile": "bun ./scripts/compile.ts",
+    "start": "bun ./build/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  }
+}

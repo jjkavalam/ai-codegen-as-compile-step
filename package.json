@@ -1,5 +1,5 @@
 {
-  "name": "hybrid-programming",
+  "name": "ai-codegen-as-compile-step",
   "module": "index.ts",
   "type": "module",
   "private": true,

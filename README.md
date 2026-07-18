@@ -28,6 +28,12 @@ A system that uses [Bun's](https://bun.com/) [Bundler api](https://bun.com/docs/
 
 ![System overview](./docs/idea.excalidraw.png)
 
+The system looks for files of the pattern `*.ai.*` and submits those files to AI for "completion" before adding them to the bundle. The prompt used is along the lines of:
+
+```
+you should provide the complete implementation of <path/to/file>
+```
+
 ### Pre-requisites
 
 You need [Bun](https://bun.com/).
@@ -36,7 +42,7 @@ You need [Bun](https://bun.com/).
 curl -fsSL https://bun.com/install | bash
 ```
 
-You need the pi.dev coding agent available as "pi" in the shell. See [pi's documentation](https://pi.dev/).
+You need the pi.dev coding agent available as `pi` in the shell. See [pi's documentation](https://pi.dev/).
 
 To do this, setup a Nodejs environment and globally install pi:
 
@@ -46,14 +52,13 @@ Example:
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 ```
 
-Next, you need to ensure pi is properly connected to an AI provider.
+Next, you need to ensure `pi` is properly connected to an AI provider.
 
-For example you could setup a valid OPENAI_API_KEY variable in the environment.
+For example you could setup a valid `OPENAI_API_KEY` variable in the environment.
 
 To test that pi works:
 
 ```
-nvm use
 pi -p "say hello"
 ```
 
@@ -67,16 +72,24 @@ To install dependencies:
 bun install
 ```
 
-Assuming your environment already has the necessary token setup to access the LLM API (see pre-requisites above).
+Assuming your environment already has the necessary token setup to access the AI API (see pre-requisites above).
 
 ```bash
 bun compile
 ```
 
-This command will trigger a bundling that involes the pi.dev agent and will put the built output in `./build`
+This command will trigger a bundling that involes the `pi` agent and will put the built output in `./build`
 
-To run the bundle:
+Finally, to execute the generated bundle:
 
 ```bash
 bun start
 ```
+
+Optionally, during the development process you may also do a typecheck by the TypeScript compiler using:
+
+```
+bun typecheck
+```
+
+Note: this typecheck's the original sources (i.e. before AI completes the missing parts).

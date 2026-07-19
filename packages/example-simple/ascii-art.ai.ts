@@ -1,0 +1,4 @@
+// this is an ascii art showing the text "Files"
+const art = ``;
+
+export default art;

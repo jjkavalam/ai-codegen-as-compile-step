@@ -5,9 +5,10 @@ import { readdirSync } from "node:fs";
  * If DIR environment variable is set; look there instead.
  */
 export function listTsFiles(): string[] {
-    const dir = process.env.DIR ?? process.cwd();
+    const dir = process.env.DIR || process.cwd();
 
     return readdirSync(dir, { withFileTypes: true })
         .filter((entry) => entry.isFile() && entry.name.endsWith(".ts"))
-        .map((entry) => entry.name);
+        .map((entry) => entry.name)
+        .sort();
 }

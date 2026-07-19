@@ -2,6 +2,10 @@ class Logger {
     private currRelPath?: string;
     constructor() {
     }
+    async logSessionStart(sessionId: string) {
+        console.log("pi.dev session name:", sessionId);
+        console.log(`To inspect session later use: pi --session ${sessionId} `)
+    }
     async logStart(relpath: string) {
         this.currRelPath = relpath;
         return this.write(`Compiling ${relpath}`);

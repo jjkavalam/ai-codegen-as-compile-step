@@ -16,18 +16,20 @@ interface GeneratedItem extends ManifestItem {
   generatedContents: string;
 }
 
-export class GeneratedRepository {
+export class GeneratedStore {
   private generatedDir: string;
   private manifestFile: Bun.FileBlob;
-  private manifest : Manifest;
+  private manifest : Manifest | undefined;
 
   constructor(generatedDir: string) {
     this.generatedDir = generatedDir;
-    this.manifest = [];
     this.manifestFile = Bun.file(join(generatedDir, "manifest.json"));
   }
 
   async findByPath(relpath: string): Promise<GeneratedItem | undefined> {
+    if (!this.manifest) {
+      this.manifest = await this.loadManifest();
+    }
     const manifestItem = this.manifest.filter(item => item.path === relpath)[0];
     if (!manifestItem) return;
     const generatedContents = await Bun.file(this.savedFilePath(relpath)).text();
@@ -38,6 +40,9 @@ export class GeneratedRepository {
   }
 
   async update(relpath: string, newContents: string) {
+    if (!this.manifest) {
+      this.manifest = await this.loadManifest();
+    }
     const inputHash = await hash(relpath);
     const itemToUpdate = this.manifest.filter(item => item.path === relpath)[0];
     if (itemToUpdate) {
@@ -70,6 +75,6 @@ export class GeneratedRepository {
       manifest = [];
     }
 
-    this.manifest = manifest;
+    return manifest;
   }
 }

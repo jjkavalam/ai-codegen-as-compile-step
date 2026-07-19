@@ -31,8 +31,8 @@ export class CodeGen {
       // but that is a problem for us, since we are using the
       // same AI agent session.
       // Solution: serialise access to the AI agent using a mutex
-      return await this.mutex.withLock(async () => {
-        return await this.handleInner(relpath);
+      return this.mutex.withLock(() => {
+        return this.handleInner(relpath);
       })
     }
 

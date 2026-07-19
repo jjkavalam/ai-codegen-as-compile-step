@@ -1,3 +1,4 @@
+import { mkdir } from "node:fs/promises";
 import * as z from "zod";
 import { join } from "node:path";
 import hash from "./hash";
@@ -54,6 +55,7 @@ export class GeneratedStore {
       };
       this.manifest.push(newEntry);
     }
+    await this.ensureGeneratedDir();
     await Bun.write(this.savedFilePath(relpath), newContents);
     await this.flushManifest();
   }
@@ -64,6 +66,10 @@ export class GeneratedStore {
 
   private async flushManifest() {
     await this.manifestFile.write(JSON.stringify(this.manifest, null, 2));
+  }
+
+  private async ensureGeneratedDir() {
+    await mkdir(this.generatedDir, { recursive: true });
   }
 
   async loadManifest() {

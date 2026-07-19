@@ -1,13 +1,13 @@
 class Logger {
-    private currRelPath?: string;
+    private sessionId?: string;
     constructor() {
     }
     async logSessionStart(sessionId: string) {
-        console.log("pi.dev session name:", sessionId);
-        console.log(`To inspect session later use: pi --session ${sessionId} `)
+        // we just save this for now;
+        // will log it at the end
+        this.sessionId = sessionId;
     }
     async logStart(relpath: string) {
-        this.currRelPath = relpath;
         return this.write(`Compiling ${relpath}`);
     }
     async logNoCompileNeeded() {
@@ -18,6 +18,14 @@ class Logger {
     }
     async logAIGenComplete() {
         return this.write(` Done\n`);
+    }
+    async logSessionEnd() {
+        if (!this.sessionId) return;
+        console.log();
+        console.log("pi.dev session name:", this.sessionId);
+        console.log(`   To inspect session: pi --session ${this.sessionId} `)
+        console.log(`   After opening the session in pi, you can run "/export" command to get an html report`);
+        console.log();
     }
 
     private async write(msg: string) {

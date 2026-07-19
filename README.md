@@ -25,6 +25,7 @@ With the high level pain point identified, here are the requirements that I have
 2. Interopability: Provide as much flexibility as possible when it comes to human written code invoking AI generated code and vice versa.
 3. Preserve the inputs to the AI agent: Preserve the specification that produced the AI generated code as a first class artifact in the codebase.
 4. Efficiency: Allow incremental changes to the AI generated part of the codebase - that is, use of AI tokens should be efficient and involve only (re)generation of the parts that really need to change.
+5. Minimally intrusive to existing workflows: A general principle; but important to ensure that the solution can be adopted into real world projects.
 
 ## This Demo
 
@@ -106,6 +107,24 @@ bun typecheck
 
 Note: this typecheck's the original sources (i.e. the `*.ai.*` files, before AI completes the missing parts). 
 It is expected that these files are already complete enough from a type perspective to be included in the typecheck.
+
+## Looking under the hood
+
+A typical compile step will produce an output like:
+
+```
+% bun compile
+$ bun ./scripts/compile.ts
+Compiling files.ai.ts ... Invoke LLM ... Done
+
+pi.dev session name: compile-1784454187263
+   To inspect session: pi --session compile-1784454187263 
+   After opening the session in pi, you can run "/export" command to get an html report
+
+Build success: true
+```
+
+Notice that you can inspect the `pi` session using the commands indicated.
 
 ## Closing notes
 

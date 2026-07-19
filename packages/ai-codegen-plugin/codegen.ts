@@ -52,6 +52,10 @@ export class CodeGen {
         contents: newGeneratedContents,
       };
     }
+
+    async onEnd() {
+      await logger.logSessionEnd();
+    }
 }
 
 

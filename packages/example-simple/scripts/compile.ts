@@ -1,4 +1,4 @@
-import aiGenPlugin from "./ai-codegen-plugin";
+import aiGenPlugin from "ai-codegen-plugin";
 
 await Bun.build({
   entrypoints: ["./"],

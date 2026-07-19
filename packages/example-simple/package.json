@@ -1,0 +1,17 @@
+{
+  "name": "example-simple",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "compile": "bun ./scripts/compile.ts",
+    "start": "bun ./build/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "ai-codegen-plugin": "workspace:*",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

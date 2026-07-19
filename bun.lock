@@ -17,6 +17,19 @@
         "typescript": "^5",
       },
     },
+    "packages/example-app": {
+      "name": "example-app",
+      "dependencies": {
+        "zod": "^4.4.3",
+      },
+      "devDependencies": {
+        "@types/bun": "latest",
+        "ai-codegen-plugin": "workspace:*",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
     "packages/example-simple": {
       "name": "example-simple",
       "devDependencies": {
@@ -36,6 +49,8 @@
     "ai-codegen-plugin": ["ai-codegen-plugin@workspace:packages/ai-codegen-plugin"],
 
     "bun-types": ["bun-types@1.3.14", "", { "dependencies": { "@types/node": "*" } }, "sha512-4N0ig0fEomHt5R0KCFWjovxow98rIoRwKolrYdCcknNwMekCXRnWEUvgu5soYV8QXtVsrUD8B95MBOZGPvr6KQ=="],
+
+    "example-app": ["example-app@workspace:packages/example-app"],
 
     "example-simple": ["example-simple@workspace:packages/example-simple"],
 

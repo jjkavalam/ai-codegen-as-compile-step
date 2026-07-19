@@ -1,0 +1,14 @@
+[
+  {
+    "path": "src/parse-cli.ai.ts",
+    "inputHash": "11193599073009587223"
+  },
+  {
+    "path": "src/commands.ai.ts",
+    "inputHash": "5430918618876550509"
+  },
+  {
+    "path": "src/db.ai.ts",
+    "inputHash": "9002922094272037471"
+  }
+]

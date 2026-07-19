@@ -1,0 +1,20 @@
+{
+  "name": "example-app",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "compile": "bun ./scripts/compile.ts",
+    "start": "bun ./build/src/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "ai-codegen-plugin": "workspace:*",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  }
+}

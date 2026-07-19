@@ -76,7 +76,15 @@ After the pre-requisites are setup, install the project's library dependencies:
 bun install
 ```
 
-Next is the "compile" step that performs the AI code generation:
+Rest of the steps can happen in any of the `packages/example-*` directories. Each example represent an independent project that uses the codegen Bun plugin in its compile step.
+
+So before we continue,
+
+```
+cd ./packages/example-simple
+```
+
+Next is the actual "compile" step that performs the AI code generation:
 
 ```bash
 bun compile

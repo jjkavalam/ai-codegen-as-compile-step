@@ -8,6 +8,20 @@ interface AgentArgs {
     existing?: string;
 }
 
+// BUG: https://github.com/earendil-works/pi/issues/6825
+// This system prompt is not actually applied
+const systemPrompt = `
+You are an expert coding assistant operating inside pi, a coding agent harness. 
+You help users by reading files and generating code.
+
+Available tools:
+- read: Read file contents
+
+Guidelines:
+- Be concise in your responses
+- Show file paths clearly when working with files
+`;
+
 export async function runAiAgentFileCompletion({ relpath, sessionId, existing }: AgentArgs) {
 
     const prompt = `you should provide the complete implementation of ${relpath}.  
@@ -30,7 +44,13 @@ ${existing}
 `;
 
     try {
-        return await $`pi --session-id ${sessionId} --tools read -p ${prompt}`.text();
+
+        return await $`pi \
+        --system-prompt ${systemPrompt} \
+        --session-id ${sessionId} \
+        --tools read --no-skills \
+        -p ${prompt}`.text();
+
     } catch(err) {
         if (err instanceof $.ShellError) {
             throw new Error(`pi.dev failed: ${err.stderr}`)

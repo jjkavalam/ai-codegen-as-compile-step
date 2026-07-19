@@ -2,13 +2,16 @@ import hash from "./hash.ts";
 import { runAiAgentFileCompletion } from "./agent.ts";
 import { GeneratedStore } from "./generated.ts";
 import logger from "./logger.ts";
+import Mutex from 'p-mutex';
 
 export class CodeGen {
     private generatedStore: GeneratedStore;
     private _sessionId: string | undefined;
+    private mutex: Mutex;
 
     constructor(generatedDir: string) {
         this.generatedStore = new GeneratedStore(generatedDir);
+        this.mutex = new Mutex();
     }
 
     async sessionId(): Promise<string> {
@@ -23,6 +26,17 @@ export class CodeGen {
     }
 
     async handle(relpath: string) {
+      // when a file imports multiple other files 
+      // each dependency is simulataneous processed by the bundler;
+      // but that is a problem for us, since we are using the
+      // same AI agent session.
+      // Solution: serialise access to the AI agent using a mutex
+      return await this.mutex.withLock(async () => {
+        return await this.handleInner(relpath);
+      })
+    }
+
+    private async handleInner(relpath: string) {
       await logger.logStart(relpath);
 
       const existing = await this.generatedStore.findByPath(relpath);

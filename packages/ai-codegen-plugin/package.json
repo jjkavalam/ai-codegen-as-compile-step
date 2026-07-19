@@ -12,6 +12,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "p-mutex": "^1.0.0",
     "zod": "^4.4.3"
   }
 }

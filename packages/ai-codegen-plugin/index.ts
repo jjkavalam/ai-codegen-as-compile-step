@@ -18,7 +18,7 @@ export default function plugin(args: Partial<PluginArgs> = {}): BunPlugin {
 
     return {
         name: "ai-codegen",
-        async setup(build) {
+        setup(build) {
 
             build.onLoad({ filter, namespace: "file" }, async (args) => {
                 const relpath = relative(process.cwd(), args.path);

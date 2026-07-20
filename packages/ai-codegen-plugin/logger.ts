@@ -25,6 +25,8 @@ class Logger {
         console.log("pi.dev session name:", this.sessionId);
         console.log(`   To inspect session: pi --session ${this.sessionId} `)
         console.log(`   After opening the session in pi, you can run "/export" command to get an html report`);
+        console.log(`   (Note that the system prompt shown in the report is misleading,`);
+        console.log(`    See ai-codegen-plugin/agent.ts for actual system prompt.)`);
         console.log();
     }
 

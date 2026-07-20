@@ -8,8 +8,9 @@ interface AgentArgs {
     existing?: string;
 }
 
-// BUG: https://github.com/earendil-works/pi/issues/6825
-// This system prompt is not actually applied
+// Note: https://github.com/earendil-works/pi/issues/6825
+// This system prompt is actually applied, just that in the exported
+// html report it shows the default.
 const systemPrompt = `
 You are an expert coding assistant operating inside pi, a coding agent harness. 
 You help users by reading files and generating code.
